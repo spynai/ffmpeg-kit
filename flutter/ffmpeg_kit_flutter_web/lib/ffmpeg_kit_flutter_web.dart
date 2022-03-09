@@ -11,15 +11,15 @@ class FFmpegKitFlutterPlugin extends FFmpegKitPlatform {
   static void registerWith(Registrar? registrar) {
     FFmpegKitPlatform.instance = FFmpegKitFlutterPlugin();
     print("register web");
-    // html.document.body!.append(html.ScriptElement()
-    //   ..src =
-    //       'build/flutter_assets/packages/ffmpeg_kit_flutter_web/web/@ffmpeg/core/dist/ffmpeg-core.js' // ignore: unsafe_html
-    //   ..type = 'application/javascript'
-    //   ..defer = true);
+    html.document.body!.append(html.ScriptElement()
+      ..src =
+          'build/flutter_assets/packages/ffmpeg_kit_flutter_web/web/@ffmpeg/core/dist/ffmpeg-core.js' // ignore: unsafe_html
+      ..type = 'application/javascript'
+      ..defer = true);
     html.document.body!.append(html.ScriptElement()
       ..src =
           'build/flutter_assets/packages/ffmpeg_kit_flutter_web/web/image_2_video.js' // ignore: unsafe_html
-      ..type = 'application/javascript'
+      ..type = 'text/javascript'
       ..defer = true);
   }
 

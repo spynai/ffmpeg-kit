@@ -1,9 +1,38 @@
-require(['require', 'build/flutter_assets/packages/ffmpeg_kit_flutter_web/web/@ffmpeg/ffmpeg'], function (require) {
-    var namedModule = require('build/flutter_assets/packages/ffmpeg_kit_flutter_web/web/@ffmpeg/ffmpeg');
+require(['require', 'build/flutter_assets/packages/ffmpeg_kit_flutter_web/web/@ffmpeg/core/dist/ffmpeg-core.js'], function (require) {
+    var namedModule = require('build/flutter_assets/packages/ffmpeg_kit_flutter_web/web/@ffmpeg/core/dist/ffmpeg-core.js');
     const { createFFmpeg, fetchFile } = namedModule;
     const ffmpeg = createFFmpeg({ log: true });    
     let a =5;
 });
+
+// require(['require', 'build/flutter_assets/packages/ffmpeg_kit_flutter_web/web/@ffmpeg/ffmpeg/dist/ffmpeg.min.js'], function (require) {
+//     var namedModule = require('build/flutter_assets/packages/ffmpeg_kit_flutter_web/web/@ffmpeg/ffmpeg/dist/ffmpeg.min.js');
+//     const { createFFmpeg, fetchFile } = namedModule;
+//     const ffmpeg = createFFmpeg({ log: true });    
+//     let a =5;
+// });
+
+// require(['require', '/Users/sabarinathanbalakumar/vscodeprojects/spyn/ffmpeg.wasm/dist/ffmpeg.dev.js'], function (require) {
+//     var namedModule = require('/Users/sabarinathanbalakumar/vscodeprojects/spyn/ffmpeg.wasm/dist/ffmpeg.dev.js');
+//     const { createFFmpeg, fetchFile } = namedModule;
+//     const ffmpeg = createFFmpeg({ log: true });
+//     let a = 5;
+// });
+
+// const ffmpeg = createFFmpeg({
+//     corePath: 'build/flutter_assets/packages/ffmpeg_kit_flutter_web/web/@ffmpeg/core/dist/ffmpeg-core.js',
+//   });
+
+// const fs = require('fs');
+// require(['require', './'], function (require) {
+//     var namedModule = require('./');
+//     const { createFFmpeg, fetchFile } = namedModule;
+//     const ffmpeg = createFFmpeg({ log: true });    
+//     let a =5;
+// });
+
+// const { createFFmpeg, fetchFile } = require('./');
+// const ffmpeg = createFFmpeg({ log: true });
 
 const convertedUrl = "This is converted url";
 
