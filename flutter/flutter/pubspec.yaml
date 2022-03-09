@@ -19,12 +19,17 @@ flutter:
         pluginClass: FFmpegKitFlutterPlugin
       macos:
         pluginClass: FFmpegKitFlutterPlugin
+      web:
+        pluginClass: FFmpegKitFlutterPlugin
 
 dependencies:
   ffmpeg_kit_flutter_platform_interface: ^0.2.1
   flutter:
     sdk: flutter
-
+  flutter_web_plugins:
+    sdk: flutter
+  js: ^0.6.3
+      
 dev_dependencies:
   flutter_test:
     sdk: flutter

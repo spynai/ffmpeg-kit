@@ -1,0 +1,38 @@
+name: ffmpeg_kit_flutter_web
+description: Web platform implementation of ffmpeg_kit_flutter
+repository: https://github.com/flutter/plugins/tree/main/packages/shared_preferences/shared_preferences_web
+issue_tracker: https://github.com/flutter/flutter/issues?q=is%3Aissue+is%3Aopen+label%3A%22p%3A+shared_preferences%22
+version: 2.0.3
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=2.0.0"
+
+flutter:
+  plugin:
+    implements: ffmpeg_kit_flutter
+    platforms:
+      web:
+        pluginClass: FFmpegKitFlutterPlugin
+        fileName: ffmpeg_kit_flutter_web.dart
+  assets:
+    - web/
+    - web/@ffmpeg/core/
+    - web/@ffmpeg/core/dist/
+    - web/@ffmpeg/ffmpeg/
+    - web/@ffmpeg/ffmpeg/dist/
+    - web/@ffmpeg/ffmpeg/src/
+    - web/@ffmpeg/ffmpeg/src/browser/
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+  js: ^0.6.3
+  ffmpeg_kit_flutter_platform_interface: ^0.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  pedantic: ^1.10.0
