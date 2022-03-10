@@ -34,6 +34,8 @@ convertImage2Video =
             ffmpeg.FS('unlink', `tmp.${num}.png`);
         }
         var convertedUrl = URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' }));
+        const video = document.getElementById('output-video');
+        video.src = convertedUrl;
         console.log('convertedUrl')
         console.log(convertedUrl);
     }
@@ -47,6 +49,16 @@ const trimVideo =
         await ffmpeg.run('-i', name, '-ss', '0', '-to', '5', 'output.mp4');
         const data = ffmpeg.FS('readFile', 'output.mp4');
         var convertedUrl = URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' }));
+        const video = document.getElementById('output-video');
+        video.src = convertedUrl;
         console.log('convertedvideo path')
         console.log(convertedUrl);
     }
+
+const reset =
+    async () => {
+        const videoElement = document.getElementById('output-video');
+        videoElement.pause();
+        videoElement.removeAttribute('src'); // empty source
+        videoElement.load();
+    }    
