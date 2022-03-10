@@ -11,9 +11,17 @@ external String convertImage2Video(String path);
 @anonymous
 external String testMethod(String path);
 
+@JS()
+@anonymous
+external String trimVideo(String path);
+
 class Ffmpegkitweb {
   static image2Video(String toBeConvertedPath) {
     return convertImage2Video(toBeConvertedPath);
+  }
+
+  static trimTheVideo(String toBeTrimmedPath) {
+    return trimVideo(toBeTrimmedPath);
   }
 
   static test(String path) {

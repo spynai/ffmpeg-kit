@@ -8,17 +8,32 @@
 //     let a =5;
 // });
 
+// define(['require', 'build/flutter_assets/packages/ffmpeg_kit_flutter_web/web/@ffmpeg/ffmpeg'], function (require) {
+//     const { createFFmpeg, fetchFile } = require('build/flutter_assets/packages/ffmpeg_kit_flutter_web/web/@ffmpeg/ffmpeg');
+//     const ffmpeg = createFFmpeg({ log: true });
+//     ffmpeg.load();
+// });
+
+// const ffmpeg = createFFmpeg({
+//     corePath: 'build/flutter_assets/packages/ffmpeg_kit_flutter_web/web/@ffmpeg/core/dist/ffmpeg-core.js',
+// });
+
+// const { createFFmpeg, fetchFile } = require('build/flutter_assets/packages/ffmpeg_kit_flutter_web/web/@ffmpeg/ffmpeg');
+// const ffmpeg = createFFmpeg({ log: true });
+// ffmpeg.load();
+
 const { createFFmpeg, fetchFile } = FFmpeg;
 const ffmpeg = createFFmpeg({ log: true });
 ffmpeg.load();
 
-const convertedUrl = "This is converted url";
+const testUrl = "This is test url";
 
 window.testMethod = function (path) {
-    return a;
+    console.log(path)
+    return testUrl;
 }
 
-convertImage2Video =
+window.convertImage2Video =
     async () => {
         console.log('convert image to video started')
         ffmpeg.FS('writeFile', 'audio.ogg', await fetchFile('./assets/triangle/audio.ogg'));
@@ -34,13 +49,14 @@ convertImage2Video =
             ffmpeg.FS('unlink', `tmp.${num}.png`);
         }
         var convertedUrl = URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' }));
-        const video = document.getElementById('output-video');
-        video.src = convertedUrl;
+        // const video = document.getElementById('output-video');
+        // video.src = convertedUrl;
         console.log('convertedUrl')
         console.log(convertedUrl);
     }
 
-const trimVideo =
+
+window.trimVideo =
     async () => {
         console.log("trimVideo")
         // const { name } = files[0];
@@ -49,13 +65,13 @@ const trimVideo =
         await ffmpeg.run('-i', name, '-ss', '0', '-to', '5', 'output.mp4');
         const data = ffmpeg.FS('readFile', 'output.mp4');
         var convertedUrl = URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' }));
-        const video = document.getElementById('output-video');
-        video.src = convertedUrl;
+        // const video = document.getElementById('output-video');
+        // video.src = convertedUrl;
         console.log('convertedvideo path')
         console.log(convertedUrl);
     }
 
-const reset =
+const reset = //only for plain html testing
     async () => {
         const videoElement = document.getElementById('output-video');
         videoElement.pause();

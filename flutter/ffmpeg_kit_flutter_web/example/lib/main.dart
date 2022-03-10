@@ -16,9 +16,19 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  onLoadClicked() {
-   var value= Ffmpegkitweb.test("Hi");
-   print("value of converted url ${value}");
+  testClicked() {
+    var value = Ffmpegkitweb.test("test path");
+    print("value of converted url ${value}");
+  }
+
+  image2VideoClicked() {
+    var value = Ffmpegkitweb.image2Video("path");
+    print("value of converted url ${value}");
+  }
+
+  trimVideoClicked() {
+    var value = Ffmpegkitweb.trimTheVideo("path");
+    print("value of converted url ${value}");
   }
 
   @override
@@ -26,11 +36,24 @@ class _MyAppState extends State<MyApp> {
     return Directionality(
       textDirection: TextDirection.ltr,
       child: Center(
-        child: ElevatedButton(
-            onPressed: () {
-              onLoadClicked();
-            },
-            child: Text("Load")),
+        child:
+            Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+          ElevatedButton(
+              onPressed: () {
+                testClicked();
+              },
+              child: Text("Test")),
+          ElevatedButton(
+              onPressed: () {
+                image2VideoClicked();
+              },
+              child: Text("Image to Video")),
+          ElevatedButton(
+              onPressed: () {
+                trimVideoClicked();
+              },
+              child: Text("Trim Video"))
+        ]),
       ),
     );
   }
