@@ -1,13 +1,17 @@
 // const { myCreateFFmpeg, fetchFile } = require('./@ffmpeg/core/dist/ffmpeg-core.js');;
 // const ffmpeg = myCreateFFmpeg({ log: true });
 
-requirejs(['require', './@ffmpeg/core/dist/ffmpeg-core.js'], function (require) {
-    var namedModule = requirejs('./@ffmpeg/core/dist/ffmpeg-core.js');
-    const { createFFmpeg } = namedModule;
-    const ffmpeg = createFFmpeg({ log: true });    
-    let a =5;
-});
+// requirejs(['require', './@ffmpeg/core/dist/ffmpeg-core.js'], function (require) {
+//     var namedModule = requirejs('./@ffmpeg/core/dist/ffmpeg-core.js');
+//     const { createFFmpeg } = namedModule;
+//     const ffmpeg = createFFmpeg({ log: true });    
+//     let a =5;
+// });
 
+const { createFFmpeg, fetchFile } = FFmpeg;
+const ffmpeg = createFFmpeg({ log: true });
+ ffmpeg.load();
+//  convertImage2Video("");
 // require(['require', '/Users/sabarinathanbalakumar/vscodeprojects/spyn/ffmpeg.wasm/dist/ffmpeg.dev.js'], function (require) {
 //     var namedModule = require('/Users/sabarinathanbalakumar/vscodeprojects/spyn/ffmpeg.wasm/dist/ffmpeg.dev.js');
 //     const { createFFmpeg, fetchFile } = namedModule;
