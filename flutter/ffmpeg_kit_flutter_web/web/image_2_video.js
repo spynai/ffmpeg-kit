@@ -10,29 +10,7 @@
 
 const { createFFmpeg, fetchFile } = FFmpeg;
 const ffmpeg = createFFmpeg({ log: true });
- ffmpeg.load();
-//  convertImage2Video("");
-// require(['require', '/Users/sabarinathanbalakumar/vscodeprojects/spyn/ffmpeg.wasm/dist/ffmpeg.dev.js'], function (require) {
-//     var namedModule = require('/Users/sabarinathanbalakumar/vscodeprojects/spyn/ffmpeg.wasm/dist/ffmpeg.dev.js');
-//     const { createFFmpeg, fetchFile } = namedModule;
-//     const ffmpeg = createFFmpeg({ log: true });
-//     let a = 5;
-// });
-
-// const ffmpeg = createFFmpeg({
-//     corePath: 'build/flutter_assets/packages/ffmpeg_kit_flutter_web/web/@ffmpeg/core/dist/ffmpeg-core.js',
-//   });
-
-// const fs = require('fs');
-// require(['require', './'], function (require) {
-//     var namedModule = require('./');
-//     const { createFFmpeg, fetchFile } = namedModule;
-//     const ffmpeg = createFFmpeg({ log: true });    
-//     let a =5;
-// });
-
-// const { createFFmpeg, fetchFile } = require('./');
-// const ffmpeg = createFFmpeg({ log: true });
+ffmpeg.load();
 
 const convertedUrl = "This is converted url";
 
@@ -40,13 +18,13 @@ window.testMethod = function (path) {
     return a;
 }
 
-window.convertImage2Video = function (audioPath) {
+convertImage2Video =
     async () => {
-        await ffmpeg.load();
-        ffmpeg.FS('writeFile', 'audio.ogg', await fetchFile(audioPath));
+        console.log('convert image to video started')
+        ffmpeg.FS('writeFile', 'audio.ogg', await fetchFile('./assets/triangle/audio.ogg'));
         for (let i = 0; i < 60; i += 1) {
             const num = `00${i}`.slice(-3);
-            ffmpeg.FS('writeFile', `tmp.${num}.png`, await fetchFile(`../assets/triangle/tmp.${num}.png`));
+            ffmpeg.FS('writeFile', `tmp.${num}.png`, await fetchFile(`./assets/triangle/tmp.${num}.png`));
         }
         await ffmpeg.run('-framerate', '30', '-pattern_type', 'glob', '-i', '*.png', '-i', 'audio.ogg', '-c:a', 'copy', '-shortest', '-c:v', 'libx264', '-pix_fmt', 'yuv420p', 'out.mp4');
         const data = ffmpeg.FS('readFile', 'out.mp4');
@@ -55,7 +33,20 @@ window.convertImage2Video = function (audioPath) {
             const num = `00${i}`.slice(-3);
             ffmpeg.FS('unlink', `tmp.${num}.png`);
         }
-        convertedUrl = URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' }));
+        var convertedUrl = URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' }));
+        console.log('convertedUrl')
+        console.log(convertedUrl);
     }
-    return convertedUrl;
-};
+
+const trimVideo =
+    async () => {
+        console.log("trimVideo")
+        // const { name } = files[0];
+        const name = "3_Point_Row.mp4";
+        ffmpeg.FS('writeFile', name, await fetchFile('./assets/3_Point_Row.mp4'));
+        await ffmpeg.run('-i', name, '-ss', '0', '-to', '5', 'output.mp4');
+        const data = ffmpeg.FS('readFile', 'output.mp4');
+        var convertedUrl = URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' }));
+        console.log('convertedvideo path')
+        console.log(convertedUrl);
+    }
