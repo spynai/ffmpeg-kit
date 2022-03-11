@@ -2,10 +2,9 @@
 
 The web implementation of [`shared_preferences`][1].
 
-## Usage
+## Run
 
-This package is [endorsed][2], which means you can simply use `shared_preferences`
-normally. This package will be automatically included in your app when you do.
+flutter run -d chrome --web-renderer html
+flutter build web --web-renderer canvaskit
 
-[1]: https://pub.dev/packages/shared_preferences
-[2]: https://flutter.dev/docs/development/packages-and-plugins/developing-packages#endorsed-federated-plugin
+

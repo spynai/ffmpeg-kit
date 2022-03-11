@@ -28,7 +28,7 @@ ffmpeg.load();
 
 const testUrl = "This is test url";
 
-window.testMethod = function (path) {
+window.testMethod = async function (path) {
     console.log(path)
     return testUrl;
 }
@@ -55,8 +55,7 @@ window.convertImage2Video =
         console.log(convertedUrl);
     }
 
-
-window.trimVideo =
+window.trimVideoSample =
     async () => {
         console.log("trimVideo")
         // const { name } = files[0];
@@ -69,6 +68,21 @@ window.trimVideo =
         // video.src = convertedUrl;
         console.log('convertedvideo path')
         console.log(convertedUrl);
+    }
+
+window.trimSelectedVideo =
+    async function (filename, filepath) {
+        console.log("trimSelectedVideo");
+        console.log(filename)
+        console.log(filepath)
+        const name = filename;
+        ffmpeg.FS('writeFile', name, await fetchFile(filepath));
+        await ffmpeg.run('-i', name, '-ss', '0', '-to', '5', 'output.mp4');
+        const data = ffmpeg.FS('readFile', 'output.mp4');
+        var convertedUrl = URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' }));
+        console.log('convertedvideo path');
+        console.log(convertedUrl);
+        return convertedUrl;
     }
 
 const reset = //only for plain html testing

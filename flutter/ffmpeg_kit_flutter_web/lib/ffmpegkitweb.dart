@@ -13,6 +13,10 @@ external String testMethod(String path);
 
 @JS()
 @anonymous
+external String trimSelectedVideo(String name, String path);
+
+@JS()
+@anonymous
 external String trimVideo(String path);
 
 class Ffmpegkitweb {
@@ -22,6 +26,10 @@ class Ffmpegkitweb {
 
   static trimTheVideo(String toBeTrimmedPath) {
     return trimVideo(toBeTrimmedPath);
+  }
+
+  static trimTheSelectedVideo(String name, String toBeTrimmedPath) {
+    return trimSelectedVideo(name, toBeTrimmedPath);
   }
 
   static test(String path) {

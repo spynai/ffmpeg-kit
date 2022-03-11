@@ -4,6 +4,7 @@
 
 import 'package:ffmpeg_kit_flutter_web/ffmpegkitweb.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 void main() {
   runApp(MyApp());
@@ -31,6 +32,20 @@ class _MyAppState extends State<MyApp> {
     print("value of converted url ${value}");
   }
 
+  final ImagePicker _picker = ImagePicker();
+
+  void _pickVideo() async {
+    final XFile? file = await _picker.pickVideo(source: ImageSource.gallery);
+    if (file != null) {
+      print("file selected");
+      print("path ${file.path}");
+      print("name ${file.name}");
+      print("file selected");
+      var value = Ffmpegkitweb.trimTheSelectedVideo(file.name, file.path);
+      print("value of converted url ${value}");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -47,12 +62,17 @@ class _MyAppState extends State<MyApp> {
               onPressed: () {
                 image2VideoClicked();
               },
-              child: Text("Image to Video")),
+              child: Text("From Asset Image to Video")),
           ElevatedButton(
               onPressed: () {
                 trimVideoClicked();
               },
-              child: Text("Trim Video"))
+              child: Text("From Asset Trim Video")),
+          ElevatedButton(
+              onPressed: () {
+                _pickVideo();
+              },
+              child: Text("From Local Trim Video"))
         ]),
       ),
     );
