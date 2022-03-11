@@ -1,6 +1,6 @@
-# shared\_preferences\_web
+# ffmpeg_kit_flutter_web
 
-The web implementation of [`shared_preferences`][1].
+The web implementation of [`ffmpeg_kit_flutter`][1].
 
 ## Run
 

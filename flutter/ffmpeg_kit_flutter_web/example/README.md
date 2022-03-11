@@ -7,3 +7,12 @@ in the Flutter wiki for instructions to setup and run the tests in this package.
 
 Check [flutter.dev > Integration testing](https://flutter.dev/docs/testing/integration-tests)
 for more info.
+
+# ffmpeg_kit_flutter_web
+
+The web implementation of [`ffmpeg_kit_flutter`][1].
+
+## Run
+
+flutter run -d chrome --web-renderer html
+flutter build web --web-renderer canvaskit

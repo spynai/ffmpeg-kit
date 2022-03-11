@@ -71,19 +71,33 @@ window.trimVideoSample =
     }
 
 window.trimSelectedVideo =
-    async function (filename, filepath) {
+    async function (inputFilename, filepath, start, end) {
         console.log("trimSelectedVideo");
-        console.log(filename)
+        console.log("inputFilename")
+        console.log(inputFilename)
+        console.log("filepath")
         console.log(filepath)
-        const name = filename;
+        console.log("start")
+        console.log(start)
+        console.log("end")
+        console.log(end)
+        const name = inputFilename;
         ffmpeg.FS('writeFile', name, await fetchFile(filepath));
-        await ffmpeg.run('-i', name, '-ss', '0', '-to', '5', 'output.mp4');
+        await ffmpeg.run('-i', name, '-ss', start, '-to', end, 'output.mp4');
         const data = ffmpeg.FS('readFile', 'output.mp4');
         var convertedUrl = URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' }));
         console.log('convertedvideo path');
         console.log(convertedUrl);
+        // saveBlob(convertedUrl, "output.mp4") //un comment this line to get the downloaded file of trimmed video
         return convertedUrl;
     }
+
+saveBlob = function (blob, outputFilename) {
+    var link = document.createElement("a"); // Or maybe get it from the current document
+    link.href = blob;
+    link.download = outputFilename;
+    link.click();
+}
 
 const reset = //only for plain html testing
     async () => {
