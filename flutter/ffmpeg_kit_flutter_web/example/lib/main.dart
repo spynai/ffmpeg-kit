@@ -41,9 +41,11 @@ class _MyAppState extends State<MyApp> {
       print("path ${file.path}");
       print("name ${file.name}");
       print("file selected");
-      var value = Ffmpegkitweb.trimTheSelectedVideo(
-          file.name, file.path, 0.toString(), 5.toString());
-      print("converted url ${value}");
+      dynamic value = await Ffmpegkitweb.trimTheSelectedVideo(
+          file.name, file.path, 0.toString(), 1.toString());
+      print("result from dart to main");
+      var result = value as String;
+      print("converted url ${result}");
     }
   }
 

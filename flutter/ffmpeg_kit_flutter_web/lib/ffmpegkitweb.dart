@@ -2,6 +2,7 @@
 library image_2_video.js;
 
 import 'package:js/js.dart';
+import 'dart:js_util';
 
 @JS()
 @anonymous
@@ -13,7 +14,7 @@ external String testMethod(String path);
 
 @JS()
 @anonymous
-external String trimSelectedVideo(
+external Future<String> trimSelectedVideo(
     String name, String path, String start, String end);
 
 @JS()
@@ -21,20 +22,24 @@ external String trimSelectedVideo(
 external String trimVideo(String path);
 
 class Ffmpegkitweb {
-  static image2Video(String toBeConvertedPath) {
-    return convertImage2Video(toBeConvertedPath);
+  static Future<String> image2Video(String toBeConvertedPath) async {
+    return await convertImage2Video(toBeConvertedPath);
   }
 
-  static trimTheVideo(String toBeTrimmedPath) {
-    return trimVideo(toBeTrimmedPath);
+  static Future<String> trimTheVideo(String toBeTrimmedPath) async {
+    return await trimVideo(toBeTrimmedPath);
   }
 
-  static trimTheSelectedVideo(
-      String filename, String toBeTrimmedPath, String start, String end) {
-    return trimSelectedVideo(filename, toBeTrimmedPath, start, end);
+  static Future trimTheSelectedVideo(
+      String filename, String toBeTrimmedPath, String start, String end) async {
+    var result = await promiseToFuture(
+        trimSelectedVideo(filename, toBeTrimmedPath, start, end));
+    print("result from js");
+    print(result);
+    return result;
   }
 
-  static test(String path) {
-    return testMethod(path);
+  static Future<String> test(String path) async {
+    return await testMethod(path);
   }
 }
