@@ -2,7 +2,7 @@
 library image_2_video.js;
 
 import 'package:js/js.dart';
-import 'dart:js_util';
+import 'package:ffmpeg_kit_flutter_web/src/shims/dart_js_util.dart' as util;
 
 @JS()
 @anonymous
@@ -32,7 +32,7 @@ class Ffmpegkitweb {
 
   static Future trimTheSelectedVideo(
       String filename, String toBeTrimmedPath, String start, String end) async {
-    var result = await promiseToFuture(
+    var result = await util.JsUtil.promiseToFuture(
         trimSelectedVideo(filename, toBeTrimmedPath, start, end));
     print("result from js");
     print(result);
