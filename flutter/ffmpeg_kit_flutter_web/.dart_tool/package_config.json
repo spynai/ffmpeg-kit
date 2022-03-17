@@ -38,6 +38,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "csslib",
+      "rootUri": "file:///Users/sabarinathanbalakumar/development/flutter/.pub-cache/hosted/pub.dartlang.org/csslib-0.17.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "fake_async",
       "rootUri": "file:///Users/sabarinathanbalakumar/development/flutter/.pub-cache/hosted/pub.dartlang.org/fake_async-1.2.0",
       "packageUri": "lib/",
@@ -64,6 +70,12 @@
     {
       "name": "flutter_web_plugins",
       "rootUri": "file:///Users/sabarinathanbalakumar/development/flutter/packages/flutter_web_plugins",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "html",
+      "rootUri": "file:///Users/sabarinathanbalakumar/development/flutter/.pub-cache/hosted/pub.dartlang.org/html-0.15.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -170,7 +182,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-03-10T17:00:18.369943Z",
+  "generated": "2022-03-17T12:12:31.215085Z",
   "generator": "pub",
   "generatorVersion": "2.16.1"
 }

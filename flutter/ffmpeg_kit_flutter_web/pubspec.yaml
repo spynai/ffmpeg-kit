@@ -10,7 +10,7 @@ environment:
 
 flutter:
   plugin:
-    implements: ffmpeg_kit_flutter
+    implements: ffmpeg_kit_flutter_min_gpl
     platforms:
       web:
         pluginClass: FFmpegKitFlutterPlugin
