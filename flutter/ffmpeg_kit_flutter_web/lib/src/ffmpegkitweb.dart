@@ -19,11 +19,18 @@ external Future<String> trimSelectedVideo(
 
 @JS()
 @anonymous
-external Future<String> execute(String name, String path, String command);
+external Future<String> executeCropAndTrimTest(
+    String name, String path, String command);
 
 @JS()
 @anonymous
-external Future<String> execute1(String name, String path, String command);
+external Future<String> executeScaleAndBlurTest(
+    String name, String path, String command);
+
+@JS()
+@anonymous
+external Future<String> execute(
+    String name, String path, String commands, String outputFileName);
 
 @JS()
 @anonymous
@@ -47,19 +54,31 @@ class Ffmpegkitweb {
     return result;
   }
 
-  static Future executeAsync(
-      String filename, String toBeExecutedPath, String command) async {
+  static Future executeAsync(String filename, String inputFilePath,
+      String command, String outputFileName) async {
+    List<String> commands = parseArguments(command);
+    print("formatted args size and values");
+    print(commands.length);
     var result = await util.JsUtil.promiseToFuture(
-        execute(filename, toBeExecutedPath, command));
+        execute(filename, inputFilePath, commands.join(" "), outputFileName));
     print("result from js");
     print(result);
     return result;
   }
 
-  static Future executeAsync1(
+  static Future executeCropAndTrimTestAsync(
       String filename, String toBeExecutedPath, String command) async {
     var result = await util.JsUtil.promiseToFuture(
-        execute1(filename, toBeExecutedPath, command));
+        executeCropAndTrimTest(filename, toBeExecutedPath, command));
+    print("result from js");
+    print(result);
+    return result;
+  }
+
+  static Future executeScaleAndBlurTestAsync(
+      String filename, String toBeExecutedPath, String command) async {
+    var result = await util.JsUtil.promiseToFuture(
+        executeScaleAndBlurTest(filename, toBeExecutedPath, command));
     print("result from js");
     print(result);
     return result;

@@ -95,42 +95,25 @@ window.trimSelectedVideo =
     }
 
 window.execute =
-    async function (inputFilename, inputFilepath, command) {
+    async function (inputFilename, inputFilepath, commands, outputFilename) {
         console.log("execute");
         console.log("inputFilename")
         console.log(inputFilename)
         console.log("inputFilepath")
         console.log(inputFilepath)
+        console.log("outputFilename")
+        console.log(outputFilename)
         console.log("command")
-        console.log(command)
+        console.log(commands)
+        var listOfCommands = commands.split(" ")
         const name = inputFilename;
         ffmpeg.FS('writeFile', name, await fetchFile(inputFilepath));
-        await ffmpeg.run('-i', name, '-filter:v', 'crop=1319:972:420:31', '-ss', '5.11', '-to', '9.51', 'output.mp4');
-        const data = ffmpeg.FS('readFile', 'output.mp4');
+        await ffmpeg.run('-i', name, ...listOfCommands);
+        const data = ffmpeg.FS('readFile', outputFilename);
         var convertedUrl = URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' }));
         console.log('convertedvideo path');
         console.log(convertedUrl);
-        saveBlob(convertedUrl, "output.mp4") //un comment this line to get the downloaded file of trimmed video
-        return convertedUrl;
-    }
-
-window.execute1 =
-    async function (inputFilename, filepath, command) {
-        console.log("execute");
-        console.log("inputFilename")
-        console.log(inputFilename)
-        console.log("filepath")
-        console.log(filepath)
-        console.log("command")
-        console.log(command)
-        const name = inputFilename;
-        ffmpeg.FS('writeFile', name, await fetchFile(filepath));
-        await ffmpeg.run('-i', name, '-pix_fmt', 'yuv420p', '-vf', 'split[original][copy];[copy]scale=ih*16/9:-1,crop=h=iw*9/16,gblur=sigma=25[blurred];[blurred][original]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2', 'output.mp4');
-        const data = ffmpeg.FS('readFile', 'output.mp4');
-        var convertedUrl = URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' }));
-        console.log('convertedvideo 1 path');
-        console.log(convertedUrl);
-        saveBlob(convertedUrl, "output.mp4") //un comment this line to get the downloaded file of trimmed video
+        // saveBlob(convertedUrl, "output.mp4") //un comment this line to get the downloaded file of trimmed video
         return convertedUrl;
     }
 

@@ -28,7 +28,7 @@ class _MyAppState extends State<MyApp> {
         "-i path -pix_fmt yuv420p -vf split[original][copy];[copy]scale=ih*16/9:-1,crop=h=iw*9/16,gblur=sigma=25[blurred];[blurred][original]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2 path");
     print("formatted args size and values");
     print(value.length);
-    print(value);
+    print(value.toString());
   }
 
   image2VideoClicked() {
@@ -50,16 +50,31 @@ class _MyAppState extends State<MyApp> {
       print("path ${file.path}");
       print("name ${file.name}");
       print("file selected");
-      // dynamic value = await Ffmpegkitweb.trimTheSelectedVideo(
-      //     file.name, file.path, 0.toString(), 1.toString());
-      dynamic value =
-          await Ffmpegkitweb.executeAsync(file.name, file.path, "Hi");
+      // '-i', name, '-filter:v', 'crop=1319:972:420:31', '-ss', '5.11', '-to', '9.51', 'output.mp4'
+      dynamic value = await Ffmpegkitweb.executeAsync(
+          file.name,
+          file.path,
+          '-filter:v crop=1319:972:420:31 -ss 5.11 -to 9.51 output.mp4', //cropping and trimming
+          "output.mp4");
       var result = value as String;
       print("result from dart to main ${result}");
-      dynamic value1 =
-          await Ffmpegkitweb.executeAsync1(file.name, result, "Hi");
-      var result1 = value1 as String;
-      print("result from dart to main ${result1}");
+      // dynamic value1 = await Ffmpegkitweb.executeAsync(
+      //     file.name,
+      //     result,
+      //     '-pix_fmt yuv420p -vf split[original][copy];[copy]scale=ih*16/9:-1,crop=h=iw*9/16,gblur=sigma=25[blurred];[blurred][original]overlay=(main_w-overlay_w)/2:(main_h-overlay_h)/2 output.mp4', //scalling, blurring
+      //     "output.mp4");
+      // var result1 = value1 as String;
+      // print("result from dart to main 1 ${result1}");
+      // dynamic value = await Ffmpegkitweb.trimTheSelectedVideo(
+      //     file.name, file.path, 0.toString(), 1.toString());
+      // dynamic value =
+      //     await Ffmpegkitweb.executeCropAndTrimTestAsync(file.name, file.path, "Hi");
+      // var result = value as String;
+      // print("result from dart to main ${result}");
+      // dynamic value1 =
+      //     await Ffmpegkitweb.executeScaleAndBlurTestAsync(file.name, result, "Hi");
+      // var result1 = value1 as String;
+      // print("result from dart to main ${result1}");
     }
   }
 
