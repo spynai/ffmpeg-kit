@@ -51,10 +51,17 @@ class _MyAppState extends State<MyApp> {
       print("name ${file.name}");
       print("file selected");
       // '-i', name, '-filter:v', 'crop=1319:972:420:31', '-ss', '5.11', '-to', '9.51', 'output.mp4'
+      // dynamic value = await Ffmpegkitweb.executeAsync(
+      //     file.name,
+      //     file.path,
+      //     '-filter:v crop=1319:972:420:31 -ss 5.11 -to 9.51 output.mp4', //cropping and trimming
+      //     "output.mp4");
+      // var result = value as String;
+      // print("result from dart to main ${result}");
       dynamic value = await Ffmpegkitweb.executeAsync(
           file.name,
           file.path,
-          '-filter:v crop=1319:972:420:31 -ss 5.11 -to 9.51 output.mp4', //cropping and trimming
+          '-ss 2 -frames:v 1 output.mp4', //cropping and trimming
           "output.mp4");
       var result = value as String;
       print("result from dart to main ${result}");
