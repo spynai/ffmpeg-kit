@@ -113,13 +113,13 @@ window.execute =
         var convertedUrl = URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' }));
         console.log('convertedvideo path');
         console.log(convertedUrl);
-        // saveBlob(convertedUrl, "output.mp4") //un comment this line to get the downloaded file of trimmed video
+        // saveBlob(convertedUrl, outputFilename) //un comment this line to get the downloaded file of trimmed video
         return convertedUrl;
     }
 
 window.executeCropAndTrimTest =
     async function (inputFilename, filepath, command) {
-        console.log("execute");
+        console.log("executeCropAndTrimTest");
         console.log("inputFilename")
         console.log(inputFilename)
         console.log("filepath")
@@ -139,7 +139,7 @@ window.executeCropAndTrimTest =
 
 window.executeScaleAndBlurTest =
     async function (inputFilename, filepath, command) {
-        console.log("execute");
+        console.log("executeScaleAndBlurTest");
         console.log("inputFilename")
         console.log(inputFilename)
         console.log("filepath")
