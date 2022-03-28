@@ -6,15 +6,18 @@ import 'package:ffmpeg_kit_flutter_web/src/shims/dart_js_util.dart' as util;
 
 @JS()
 @anonymous
-external Future<String> upload(String blobUrl, String filename);
+external Future<String> upload(
+    String blobUrl, String filename, String contentType);
 
 @JS()
 @anonymous
 external Future<String> getBlobFromFileUrl(String blobUrl);
 
 class DartToJsUpload {
-  static Future uploadToFirebase(String path, String filename) async {
-    var result = await util.JsUtil.promiseToFuture(upload(path, filename));
+  static Future uploadToFirebase(
+      String path, String filename, String contentType) async {
+    var result =
+        await util.JsUtil.promiseToFuture(upload(path, filename, contentType));
     print("result from js");
     print(result);
     return result;

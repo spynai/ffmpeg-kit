@@ -1,30 +1,30 @@
-// const firebaseConfig = {
-//     apiKey: "AIzaSyC8EC6vjXVkiIkvTZuoxOLpn6DX8XL550Y",
-//     authDomain: "spyn-physical-therapy.firebaseapp.com",
-//     projectId: "spyn-physical-therapy",
-//     storageBucket: "spyn-physical-therapy",
-//     messagingSenderId: "337363482409",
-//     appId: "1:337363482409:web:c3530e7dd6b5801bfae938",
-//     measurementId: "G-WZJ16QHH28"
-// };
+const firebaseConfig = {
+    apiKey: "AIzaSyC8EC6vjXVkiIkvTZuoxOLpn6DX8XL550Y",
+    authDomain: "spyn-physical-therapy.firebaseapp.com",
+    projectId: "spyn-physical-therapy",
+    storageBucket: "spyn-physical-therapy",
+    messagingSenderId: "337363482409",
+    appId: "1:337363482409:web:c3530e7dd6b5801bfae938",
+    measurementId: "G-WZJ16QHH28"
+};
 // Initialize Firebase
-// firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 
-// firebase.auth().signInWithEmailAndPassword("c-sabari@spyn.ai", "123456")
-//     .then((userCredential) => {
-//         console.log("loggedin");
-//         // Signed in
-//         var user = userCredential.user;
-//         // ...
-//     })
-//     .catch((error) => {
-//         console.log("login error");
-//         console.log(error);
-//         var errorCode = error.code;
-//         var errorMessage = error.message;
-//     });
+firebase.auth().signInWithEmailAndPassword("c-sabari@spyn.ai", "123456")
+    .then((userCredential) => {
+        console.log("loggedin");
+        // Signed in
+        var user = userCredential.user;
+        // ...
+    })
+    .catch((error) => {
+        console.log("login error");
+        console.log(error);
+        var errorCode = error.code;
+        var errorMessage = error.message;
+    });
 
-//comment till this line from the top if you want to test with an existing application which has firebase already configured.
+//uncomment till this line from the top if you want to test with an existing application which has firebase already configured.
 
 var storageRef = firebase.storage().ref();
 
@@ -53,10 +53,13 @@ async function handleFileSelect(evt) {
     console.log("last")
 }
 
-window.upload = async function (imageURL, name) {
+window.upload = async function (imageURL, name, contentType) {
+    var metadata = {
+        'contentType': contentType
+    };
     var url = await makeBlobRequest(imageURL).then((result) => {
         return new Promise(function (resolve, reject) {
-            storageRef.child(name).put(result).then(function (snapshot) {
+            storageRef.child(name).put(result, metadata).then(function (snapshot) {
                 console.log('Uploaded', snapshot.totalBytes, 'bytes.');
                 console.log('File metadata:', snapshot.metadata);
                 snapshot.ref.getDownloadURL().then(function (url) {

@@ -41,21 +41,43 @@ class _MyAppState extends State<MyApp> {
     print("value of converted url ${value}");
   }
 
-
   final ImagePicker _picker = ImagePicker();
 
+  String imagepath = '';
   void _pickImage() async {
     final XFile? file = await _picker.pickImage(source: ImageSource.gallery);
     if (file != null) {
       print("file selected");
       print("path ${file.path}");
       print("name ${file.name}");
-      uploadToFirebase(file.path, file.name);
+      uploadToFirebase(file.path, file.name, 'image/png');
     }
   }
 
-  uploadToFirebase(String path, String name) async {
-    dynamic value = await DartToJsUpload.uploadToFirebase(path, name);
+  void _pickImageAndDisplay() async {
+    final XFile? file = await _picker.pickImage(source: ImageSource.gallery);
+    if (file != null) {
+      print("file selected");
+      print("path ${file.path}");
+      print("name ${file.name}");
+      imagepath = file.path;
+      setState(() {});
+    }
+  }
+
+  void _pickVideoAndUpload() async {
+    final XFile? file = await _picker.pickVideo(source: ImageSource.gallery);
+    if (file != null) {
+      print("file selected");
+      print("path ${file.path}");
+      print("name ${file.name}");
+      uploadToFirebase(file.path, file.name, 'video/mp4');
+    }
+  }
+
+  uploadToFirebase(String path, String name, String contentType) async {
+    dynamic value =
+        await DartToJsUpload.uploadToFirebase(path, name, contentType);
     var result = value as String;
     print("download url of the uploaded file ${result}");
   }
@@ -75,18 +97,21 @@ class _MyAppState extends State<MyApp> {
       //     "output.mp4");
       // var result = value as String;
       // print("result from dart to main after crop and trim ${result}");
+      // uploadToFirebase(result, "testing.mp4", 'video/mp4');
 
       //frame extraction
       // dynamic value = await Ffmpegkitweb.executeAsync(
-      //     file.name, file.path, '-ss 2 -frames:v 1 output.mp4', "output.mp4");
+      //     file.name, file.path, '-ss 2 -frames:v 1 output.png', "output.png");
       // var result = value as String;
       // print("result from dart to main after frame extraction ${result}");
+      // uploadToFirebase(result, "testing.png", 'image/png');
 
       //gif
-      dynamic value = await Ffmpegkitweb.executeAsync(file.name, file.path,
-          '-vf fps=5,scale=320:-1:flags=lanczos output.gif', "output.gif");
-      var result = value as String;
-      print("result from dart to main after gif ${result}");
+      // dynamic value = await Ffmpegkitweb.executeAsync(file.name, file.path,
+      //     '-vf fps=5,scale=320:-1:flags=lanczos output.gif', "output.gif");
+      // var result = value as String;
+      // print("result from dart to main after gif ${result}");
+      // uploadToFirebase(result, "testing.gif", 'image/gif');
 
       //scalling, blurring
       // dynamic value1 = await Ffmpegkitweb.executeAsync(
@@ -130,6 +155,7 @@ class _MyAppState extends State<MyApp> {
                 testArgsClicked();
               },
               child: Text("Test Args")),
+          imagepath.isNotEmpty ? Image.network(imagepath) : SizedBox(),
           ElevatedButton(
               onPressed: () {
                 image2VideoClicked();
@@ -147,7 +173,7 @@ class _MyAppState extends State<MyApp> {
               child: Text("From Local Trim Video")),
           ElevatedButton(
               onPressed: () {
-                _pickImage();
+                _pickVideo();
               },
               child: Text("Pick And Upload To Firebase"))
         ]),
