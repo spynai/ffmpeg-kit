@@ -10,12 +10,18 @@ external Future<String> upload(String blobUrl, String filename);
 
 @JS()
 @anonymous
-external Future<String> getFileBlobFromUrl(String blobUrl);
+external Future<String> getBlobFromFileUrl(String blobUrl);
 
 class DartToJsUpload {
   static Future uploadToFirebase(String path, String filename) async {
-    // var result = await util.JsUtil.promiseToFuture(upload(path, filename));
-    var result = await util.JsUtil.promiseToFuture(getFileBlobFromUrl(path));
+    var result = await util.JsUtil.promiseToFuture(upload(path, filename));
+    print("result from js");
+    print(result);
+    return result;
+  }
+
+  static Future getBlob(String path) async {
+    var result = await util.JsUtil.promiseToFuture(getBlobFromFileUrl(path));
     print("result from js");
     print(result);
     return result;

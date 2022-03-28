@@ -9,3 +9,9 @@ class Ffmpegkitweb {
     return Future.value();
   }
 }
+
+class DartToJsUpload {
+  static Future<String> uploadToFirebase(String path, String filename) async {
+    return await Future.value("");
+  }
+}
