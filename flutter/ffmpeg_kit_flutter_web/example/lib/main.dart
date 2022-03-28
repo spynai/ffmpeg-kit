@@ -41,7 +41,24 @@ class _MyAppState extends State<MyApp> {
     print("value of converted url ${value}");
   }
 
+
   final ImagePicker _picker = ImagePicker();
+
+  void _pickImage() async {
+    final XFile? file = await _picker.pickImage(source: ImageSource.gallery);
+    if (file != null) {
+      print("file selected");
+      print("path ${file.path}");
+      print("name ${file.name}");
+      uploadToFirebase(file.path, file.name);
+    }
+  }
+
+  uploadToFirebase(String path, String name) async {
+    dynamic value = await DartToJsUpload.uploadToFirebase(path, name);
+    var result = value as String;
+    print("download url of the uploaded file ${result}");
+  }
 
   void _pickVideo() async {
     final XFile? file = await _picker.pickVideo(source: ImageSource.gallery);
@@ -49,8 +66,6 @@ class _MyAppState extends State<MyApp> {
       print("file selected");
       print("path ${file.path}");
       print("name ${file.name}");
-      print("file selected");
-
       //cropping and trimming
       // '-i', name, '-filter:v', 'crop=1319:972:420:31', '-ss', '5.11', '-to', '9.51', 'output.mp4'
       // dynamic value = await Ffmpegkitweb.executeAsync(
@@ -67,13 +82,13 @@ class _MyAppState extends State<MyApp> {
       // var result = value as String;
       // print("result from dart to main after frame extraction ${result}");
 
-      //gif 
-      dynamic value = await Ffmpegkitweb.executeAsync(
-          file.name, file.path, '-vf fps=5,scale=320:-1:flags=lanczos output.gif', "output.gif");
+      //gif
+      dynamic value = await Ffmpegkitweb.executeAsync(file.name, file.path,
+          '-vf fps=5,scale=320:-1:flags=lanczos output.gif', "output.gif");
       var result = value as String;
       print("result from dart to main after gif ${result}");
 
-    //scalling, blurring
+      //scalling, blurring
       // dynamic value1 = await Ffmpegkitweb.executeAsync(
       //     file.name,
       //     result,
@@ -129,7 +144,12 @@ class _MyAppState extends State<MyApp> {
               onPressed: () {
                 _pickVideo();
               },
-              child: Text("From Local Trim Video"))
+              child: Text("From Local Trim Video")),
+          ElevatedButton(
+              onPressed: () {
+                _pickImage();
+              },
+              child: Text("Pick And Upload To Firebase"))
         ]),
       ),
     );

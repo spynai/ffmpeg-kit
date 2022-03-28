@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <base href="$FLUTTER_BASE_HREF">
 
@@ -7,20 +8,34 @@
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="A new Flutter project.">
   <meta http-equiv="origin-trial" content="token">
-  
+
   <title>flutter_application_web_ffmpeg</title>
   <!-- <script src="./require.js"></script>
-  <script src="./@ffmpeg/core/dist/ffmpeg-core.js"></script>
+   <script src="./@ffmpeg/core/dist/ffmpeg-core.js"></script>
   <script src="./image_2_video.js"></script> -->
   <script src="./coi-serviceworker.js"></script>
   <script src="./@ffmpeg/core/dist/ffmpeg-core.js"></script>
   <script src="./@ffmpeg/ffmpeg/dist/ffmpeg.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
   <script src="./image_2_video.js"></script>
 </head>
+
 <body>
+  <h6>Choose File</h6>
+  <input type="file" id="file" name="file" />
+  <h6>File URL:</h6>
   <button onclick="convertImage2Video()">Image to Video</button>
   <button onclick="trimVideo()">Trim Video</button>
   <button onclick="reset()">reset</button>
   <video id="output-video" controls></video><br />
+  <script>
+    window.onload = function () {
+      document.getElementById('file').addEventListener('change', handleFileSelect, false);
+    }
+  </script>
 </body>
+<script type="text/javascript" src="./upload_firebase.js"></script>
+
 </html>
