@@ -1,28 +1,28 @@
-const firebaseConfig = {
-    apiKey: "AIzaSyC8EC6vjXVkiIkvTZuoxOLpn6DX8XL550Y",
-    authDomain: "spyn-physical-therapy.firebaseapp.com",
-    projectId: "spyn-physical-therapy",
-    storageBucket: "spyn-physical-therapy",
-    messagingSenderId: "337363482409",
-    appId: "1:337363482409:web:c3530e7dd6b5801bfae938",
-    measurementId: "G-WZJ16QHH28"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+// const firebaseConfig = {
+//     apiKey: "AIzaSyC8EC6vjXVkiIkvTZuoxOLpn6DX8XL550Y",
+//     authDomain: "spyn-physical-therapy.firebaseapp.com",
+//     projectId: "spyn-physical-therapy",
+//     storageBucket: "spyn-physical-therapy",
+//     messagingSenderId: "337363482409",
+//     appId: "1:337363482409:web:c3530e7dd6b5801bfae938",
+//     measurementId: "G-WZJ16QHH28"
+// };
+// // Initialize Firebase
+// firebase.initializeApp(firebaseConfig);
 
-firebase.auth().signInWithEmailAndPassword("c-sabari@spyn.ai", "123456")
-    .then((userCredential) => {
-        console.log("loggedin");
-        // Signed in
-        var user = userCredential.user;
-        // ...
-    })
-    .catch((error) => {
-        console.log("login error");
-        console.log(error);
-        var errorCode = error.code;
-        var errorMessage = error.message;
-    });
+// firebase.auth().signInWithEmailAndPassword("c-sabari@spyn.ai", "123456")
+//     .then((userCredential) => {
+//         console.log("loggedin");
+//         // Signed in
+//         var user = userCredential.user;
+//         // ...
+//     })
+//     .catch((error) => {
+//         console.log("login error");
+//         console.log(error);
+//         var errorCode = error.code;
+//         var errorMessage = error.message;
+//     });
 
 //uncomment till this line from the top if you want to test with an existing application which has firebase already configured.
 
