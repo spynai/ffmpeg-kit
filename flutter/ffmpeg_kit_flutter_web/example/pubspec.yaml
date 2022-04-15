@@ -1,0 +1,47 @@
+name: ffmpeg_kit_flutter_web_integration_tests
+publish_to: none
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=2.2.0"
+
+dependencies:
+  ffmpeg_kit_flutter_platform_interface: ^0.2.1
+  flutter:
+    sdk: flutter
+  ffmpeg_kit_flutter_web:
+    path: ../
+  image_picker: ^0.8.4
+  # video_player:
+  #   git:
+  #     url: https://github.com/spynai/ios_video_player.git
+  # video_editor:
+  #   git:
+  #     url: https://github.com/spynai/video_editor.git
+  #     ref: web
+
+dev_dependencies:
+  flutter_driver:
+    sdk: flutter
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  js: ^0.6.3
+
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # # To add assets to your application, add an assets section, like this:
+  # assets:  
+  #    - web/
+  #    - web/@ffmpeg/core/
+  #    - web/@ffmpeg/core/dist/
+  #    - web/@ffmpeg/ffmpeg/
+  #    - web/@ffmpeg/ffmpeg/dist/
+  #    - web/@ffmpeg/ffmpeg/src/
+  #    - web/@ffmpeg/ffmpeg/src/browser/  
